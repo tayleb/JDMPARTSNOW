@@ -1,162 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Nissan Stagea C34 / R33 Skyline RB25 Parts Catalog</title>
-<link rel="stylesheet" href="css/style.css">
+<title>Nissan Stagea C34 / R33 Parts Catalog</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; background:#fff; }
+.header { background:#cc0000; color:white; padding:15px; font-size:22px; text-align:center; font-weight:bold; }
+.sidebar { width:280px; height:100vh; position:fixed; left:0; top:0; background:#f2f2f2; border-right:2px solid #cc0000; padding-top:70px; overflow-y:auto; }
+.sidebar h3 { padding-left:20px; }
+.vehicle-item { padding:10px 20px; cursor:pointer; border-bottom:1px solid #ddd; }
+.vehicle-item:hover { background:#ffe6e6; }
+.submenu { display:none; background:#ffffff; border-left:3px solid #cc0000; }
+.submenu div { padding:8px 30px; cursor:pointer; border-bottom:1px solid #eee; }
+.submenu div:hover { background:#ffcccc; }
+.content { margin-left:290px; padding:25px; }
+.title { font-size:24px; font-weight:bold; border-bottom:3px solid #cc0000; display:inline-block; margin-bottom:15px; }
+.partnumber { background:#ffefef; border:1px solid #cc0000; padding:10px; margin:5px 0; width:fit-content; border-radius:4px; }
+a { color:#cc0000; text-decoration:underline; margin-left:10px; }
+</style>
 </head>
 <body>
 
-<div class="header">Nissan Stagea C34 / R33 Skyline RB25 Parts Catalog</div>
+<div class="header">Nissan Stagea C34 / R33 Parts Catalog</div>
 
 <div class="sidebar">
-  <h3>Navigation</h3>
-  <div class="vehicle-item"><a href="index.html">Home</a></div>
-  <div class="vehicle-item" onclick="toggleMenu('stageaMenu')">Stagea / R33 Sections</div>
-  <div id="stageaMenu" class="submenu">
-    <div onclick="showParts('engine')">Engine</div>
-    <div onclick="showParts('transmission')">Transmission</div>
-    <div onclick="showParts('suspension')">Suspension & Driveline</div>
-    <div onclick="showParts('wheels')">Wheels & Brakes</div>
-    <div onclick="showParts('interior')">Interior</div>
-    <div onclick="showParts('exterior')">Exterior</div>
-    <div onclick="showParts('fluids')">Fluids</div>
-    <div onclick="showParts('alignment')">Wheel Alignment Specs</div>
-  </div>
-  <div class="vehicle-item"><a href="odysseyRB1.html">Honda Odyssey RB1/2</a></div>
+<h3>Categories</h3>
+<div class="vehicle-item" onclick="showParts('engine')">Engine</div>
+<div class="vehicle-item" onclick="showParts('transmission')">Transmission</div>
+<div class="vehicle-item" onclick="showParts('suspension')">Suspension & Driveline</div>
+<div class="vehicle-item" onclick="showParts('wheels')">Wheels & Brakes</div>
+<div class="vehicle-item" onclick="showParts('interior')">Interior</div>
+<div class="vehicle-item" onclick="showParts('exterior')">Exterior</div>
+<div class="vehicle-item" onclick="showParts('fluids')">Fluids</div>
+<div class="vehicle-item" onclick="showParts('alignment')">Wheel Alignment Specs</div>
+<div class="vehicle-item" onclick="showParts('rb25')">RB25 Engine Info</div>
 </div>
 
 <div class="content" id="contentBox">
-  <div class="title">Select a section</div>
+<div class="title">Select a category</div>
 </div>
 
-<script src="js/scripts.js"></script>
 <script>
-// Stagea / R33 parts data
-const stageaData = {
-  engine: [
-    {name:"Radiator 1993-1998 R33 Skyline", link:"", description:"Automatic models have fluid routed through bottom to warm/cool. Manual models can bypass cooler, adding 0.5-0.75L Castrol Transmax or Nissan Matic-J."},
-    {name:"Water Pump 21010-24U26", link:"", description:"ISR OE Replacement (Available at iRace!)"},
-    {name:"Thermostat 21200-42L0A", link:"", description:"2000-2004 Nissan Frontier VG33E. Optional swap Mishimoto 155°F/68°C."},
-    {name:"Clutch Fan GKTech", link:"", description:"High Performance Fan + RB/VG Clutch Fan Adapter (Available at iRace!)"},
-    {name:"Fan Belts", link:"", description:"Non-Neo: Power Steering 3PK850, Air Con 4PK910, Alternator 4PK850; Neo: Power Steering 4PK860, Air Con 4PK915, Alternator 4PK890"},
-    {name:"PCV Valve 11810-75T00", link:"", description:"1998-2004 Nissan Frontier KA24DE. Optional Swap Beck Arnley 045-0332."},
-    {name:"Exhaust Manifold Studs", link:"", description:"M10x1.25 50mm length."},
-    {name:"Head Studs", link:"", description:"Standard ARP 202-4301 or High Strength ARP 202-4309."},
-    {name:"Half Moons", link:"", description:"OEM Rubber 11051-58500 or Aftermarket Billet Aluminum."},
-    {name:"Battery Options", link:"", description:"Japanese Spec narrow terminal. OEM 51/51R, Aftermarket 34/34-78, FMIC mods 86/75-86."},
-    {name:"MAF Sensor", link:"", description:"95-99 Nissan Maxima 22680-31U00, optional swaps Delphi AF10164, Beck Arnley 158-0824."},
-    {name:"AAC Valve 23785-AA001", link:"", description:"OEM Stagea part."},
-    {name:"Air Intake APEXi", link:"", description:"Power Intake Kit 507-N006 for 93-01 R33/R34 Skyline."},
-    {name:"Starter 23300-AA300", link:"", description:"Forklift starters recommended for cold weather Stageas."},
-    {name:"Alternator Replacements", link:"", description:"1999-2002 Nissan Quest w/50Ignite Bracket, TYC 213821, recommended 4PK880 belt."},
-    {name:"Spark Plugs NGK 4644/BRK7E", link:"", description:"0.8mm gap."},
-    {name:"Audi Coilpack Conversion", link:"", description:"RB25DET uses Audi R8 08-15 (48728), RB25DET NEO uses Audi A4 02-05 3.0L V6 (48704)."},
-    {name:"O2 Sensor OEM 22690-AA007", link:"", description:"Optional swaps: 90-96 Nissan 300ZX Bosch 13091, NTK 24039. Re-pin plug required."},
-    {name:"Fuel Filter K&N PF-1100", link:"", description:"Replacement filter, available Amazon CA/US."},
-    {name:"Fuel Injectors", link:"", description:"RB25DET Stock 340cc, 350Z 380cc, GT-R35 550cc (Top Feed Neo Rail only). Requires tuning."},
-    {name:"Fuel Pump Walbro GSS340", link:"", description:"255LPH aftermarket pump."},
-    {name:"Full Engine Gasket Kit Neo 10101-AA525", link:"", description:"Available at LF Industries Canada."},
-    {name:"Timing Belt 13028-20P25", link:"", description:"Available as full kit with pulleys."}
-  ],
-  transmission: [
-    {name:"S2 Tiptronic RE4R01B", link:"", description:"Automatic transmission for Stagea."},
-    {name:"Automatic Transmission Filter & Gasket JS JT304K", link:"", description:"Nissan P/N 31728-4AX00."},
-    {name:"Automatic Transmission Pan Gasket 31397-41X04", link:"", description:"OEM part replacement."},
-    {name:"Stage 2 Shift Kit", link:"", description:"MV Automatics Stage 2 kit for RE4R01A/B transmissions."},
-    {name:"5 Speed Manual Swap", link:"", description:"Manual transmission swap info."}
-  ],
-  suspension: [
-    {name:"Outer Tie Rod Ends", link:"", description:"S1/S2 AWD Moog ES3466, S2 RWD Moog ES800357/ES800358."},
-    {name:"Front Lower Ball Joints", link:"", description:"40160-AR510, Febest 0220-LWD1."},
-    {name:"Rear Ball Joint 240SX", link:"", description:"RDS-BJ492 (Available at Kudos Motorsport)."},
-    {name:"Hicas Ball Joint 300ZX TT", link:"", description:"55154-30P01."},
-    {name:"Steering Rack Bellows/Boots", link:"", description:"95-98 Nissan 240SX."},
-    {name:"Front Stabilizer Link/Sway Bar Link", link:"", description:"Moog K80620, fits 06-10 Hyundai Sonata rears."},
-    {name:"Rear Wheel Bearing 92-96 300ZX TT", link:"", description:"43280-AA300, Rear Wheel Seal 43252-40P00."},
-    {name:"Rear Drive Shaft", link:"", description:"Infiniti G35 (unconfirmed, check fit)."},
-    {name:"CV Axles Front & Rear", link:"", description:"Front CVS.823/824, Rear 02-06 Infiniti G35x. Inner/outer boots: Febest/Napa part numbers."},
-    {name:"Suspension Components R33/R32 Carryover", link:"", description:"Front shocks, springs, swaybars. Rear: R33 GTST shocks or 95-98 240SX KYB 741045. Coilover options Silvers/BCRacing."},
-    {name:"Control Arm Bushings", link:"", description:"SuperPro SPF3153K/SPF3610K/SPF1811K. Complete vehicle bushings via Siberian Bushing Canada."},
-    {name:"Rear Subframe Bushings Whiteline W92447", link:"", description:"OEM replacement or aftermarket."}
-  ],
-  wheels: [
-    {name:"Tire Sizes", link:"", description:"16:215/60R16, 17:215/55R17 OR 235/50R17, 18:235/45R18 (Winters 225/45R18)."},
-    {name:"Wheel Studs", link:"", description:"Front 43222-28B10, Rear 43222-50J00."},
-    {name:"Lug Nuts M12x1.25", link:"", description:"Standard spec."},
-    {name:"Bolt Pattern", link:"", description:"5x114.3, Center Bore 66.1mm."},
-    {name:"Brakes Front & Rear", link:"", description:"Various S1/S2 swaps using Infiniti Q45, 300ZX, Nissan 370Z parts. Refer to catalog details."},
-    {name:"Brake Master Cylinder", link:"", description:"GKTech HFM BM57 RHD variant."}
-  ],
-  interior: [
-    {name:"Stereo Wiring Adapter Scosche NN03B", link:"", description:"Front and rear antenna adapter NDAB."},
-    {name:"Speakers Front 6.75\" / Rear 6.5\"", link:"", description:"Aftermarket or OEM options."},
-    {name:"Stereo Trim Removal Video", link:"https://youtu.be/S8R1E_ob5Aw", description:"Used for S1/S2 Stagea trim removal."},
-    {name:"7\" Android Double Din 3D Print Files", link:"http://bit.ly/StagXanaviMain", description:"Main 3D print adapter for Stagea dash."}
-  ],
-  exterior: [
-    {name:"R34 Front Clip Swap Video", link:"https://youtu.be/S8R1E_ob5Aw", description:"Front clip swap instructions."},
-    {name:"Windshield Moulding", link:"", description:"72752-0V010 Rubber Dum Seal G2G16-89900."},
-    {name:"Wiper Blades J Hook", link:"", description:"Drivers 21\", Passenger 17\", Rear 12\"."},
-    {name:"Hood Struts 95-99 Maxima", link:"", description:"StrongArm 4524, 10mm ball studs M8X1.25."},
-    {name:"Rear Hatch Struts 05-15 Xterra", link:"", description:"LH 76649-EA000, RH 76648-EA000. 20\"/23\" struts StrongArm/AMS."},
-    {name:"Hood Latch", link:"", description:"65601-70Y00."},
-    {name:"Bumper Lights S1 93-97 Altima", link:"", description:"Direct fit with minor tab filing."},
-    {name:"Badges", link:"", description:"Hatch 'Stagea' 90895-0V000, Hatch 'Nissan' 90890-0V010, Grille 'Unicorn' 62892-0V801."},
-    {name:"Door Link", link:"", description:"80430-KB50B & 80431-KB50B."},
-    {name:"Rear Washer Arm Pivot Seal", link:"", description:"2009-2020 Nissan GTR 28715-0V000."}
-  ],
-  fluids: [
-    {name:"Engine Oil", link:"", description:"JP Spec 7.5w30 Synthetic, Canadian 5w30 or 10w30. ~4.3L w/o filter, 4.7L w/ filter."},
-    {name:"Oil Filter", link:"", description:"15208-53J0A, Mobil-1 M1-208, K&N HP-2008, Wix 51361."},
-    {name:"Transmission Fluid", link:"", description:"Nissan Matic J / Castrol Transmax J or Z. ~6.5L w/o torque converter, 9L w/ torque converter."},
-    {name:"Differentials", link:"", description:"Front & Rear 75w90, Motul Gear 300."},
-    {name:"Attesa AWD", link:"", description:"Reservoir in trunk, ~1.8L ATF 4400."},
-    {name:"Power Steering", link:"", description:"ATF 4400 or Redline D4 ~1.5L."},
-    {name:"Brakes", link:"", description:"Bosch DOT 3 or equivalent ~1.5L."},
-    {name:"Coolant", link:"", description:"Nissan Green 50/50 Premix ~5L."}
-  ],
-  alignment: [
-    {name:"Front Total Toe", link:"", description:"0 - 0.17°"},
-    {name:"FL + FR Toe", link:"", description:"0 - 0.09°"},
-    {name:"FL + FR Camber", link:"", description:"-1.33° - 0.17°"},
-    {name:"Rear Total Toe", link:"", description:"-0.13° - 0.33°"},
-    {name:"RL + RR Toe", link:"", description:"-0.07° - 0.17°"},
-    {name:"RL + RR Camber", link:"", description:"-1.42° - -0.42°"},
-    {name:"L + R Caster", link:"", description:"5.83° - 7.33°"},
-    {name:"L + R SAI", link:"", description:"12.33° - 13.83°"}
-  ]
+const data = {
+engine: [
+{name:"Radiator", link:"", description:"1993 - 1998 R33 Skyline\n(Automatic transmission models have a routing through the bottom of the radiator to warm the fluid up during the winter, and cool it during the summer. You can opt for a manual transmission radiator, and bypass the radiator cooler and strictly run just the external cooler located in front of the radiator. If you do this, you will need to add .5-.75L of Castrol Transmax or Nissan Matic-J Transmission Fluid.)"},
+{name:"Water Pump", link:"", description:"21010-24U26\nISR OE Replacement (Available at iRace! Click Here!)"},
+{name:"Thermostat", link:"", description:"Nissan P/N 21200-42L0A\n2000-2004 Nissan Frontier (VG33E)\nOptional Swap: Mishimoto 155 Deg F/68 Deg C (Available at iRace! Click Here!)"},
+{name:"Clutch Fan", link:"", description:"GKTech SR/RB/VG High Performance Fan (Available at iRace! Click here!)\nGKTech RB/VG Clutch Fan Adapter (Available at iRace! Click here!)"},
+{name:"Fan Belts", link:"", description:"Non-Neo: Power Steering 3PK850, Air Con 4PK910, Alternator 4PK850\nNeo: Power Steering 4PK860, Air Con 4PK915, Alternator 4PK890"},
+{name:"PCV Valve", link:"", description:"11810-75T00\n1998-2004 Nissan Frontier (KA24DE)\nOptional Swap: Beck Arnley 045-0332"},
+{name:"PCV Valve Insulator", link:"", description:"11812-41B00\n1998-2004 Nissan Frontier (KA24DE)"},
+{name:"Exhaust Manifold Studs", link:"", description:"M10x1.25 50mm Length"},
+{name:"Head Studs", link:"", description:"Standard Strength: ARP 202-4301 (Available at iRace! Click Here!)\nHigh Strength: ARP 202-4309"},
+{name:"Half Moons", link:"", description:"OEM Rubber 11051-58500\nAftermarket Billet Aluminum (Available from Outsider Garage! Click Here!)"},
+{name:"Battery", link:"", description:"Japanese Spec are a much more narrow battery terminal. Will require new terminal ends on battery cables.\nOEM Fit - 51/51R Series (Battery is narrow enough, cables will reach either option)\nAftermarket Fit - 34 or 34/78 Dual Terminal Series\nAftermarket Fit w/ FMIC Piping modifications - 86 or 75/86 Dual Terminal Series"},
+{name:"MAF Sensor", link:"", description:"95-99 Nissan Maxima 22680-31U00\nOptional Swap: Delphi AF10164, Beck Arnley 158-0824"},
+{name:"AAC Valve", link:"", description:"23785-AA001"},
+{name:"Air Intake", link:"", description:"APEXi Power Intake Kit\n93-01 Skyline R33 R34 507-N006\n(Available at iRace! Click Here!)"},
+{name:"Starter", link:"", description:"OEM P/N 23300-AA300\n95-11 Nissan CF50 / PF50 Forklift\n23300-00H10\n(Forklift starters are better for Stageas that will experience cold weather starting)"},
+{name:"Alternator Replacements", link:"", description:"1999 - 2002 Nissan Quest w/50Ignite Bracket Adapter\nAlternator TYC P/N 213821\nRecommended Belt 4PK880"},
+{name:"Spark Plugs", link:"", description:"NGK 4644/BRK7E, 0.8mm Gap"},
+{name:"Audi Coilpack Conversion", link:"", description:"RB25DET - 08-15 Audi R8 Coil Packs (NGK 48728)\nRB25DET NEO - 02-05 Audi A4 3.0L V6 Coil Packs (NGK 48704)"},
+{name:"O2 Sensor", link:"", description:"OEM - 22690-AA007\nOptional Swap: 1990-1996 Nissan 300ZX, Bosch 13091, NTK 24039"},
+{name:"Fuel Filter", link:"", description:"K&N PF-1100\nAmazon Canada / Amazon USA"},
+{name:"Fuel Injectors", link:"", description:"16600-AA500 340cc (Stock Fit RB25DET)\n16600-EY00A 380cc (Stock Fit 350z)\n16600-38B0A 550cc (Stock Fit GT-R35)*\n*Tuners require tuning if installing these injectors"},
+{name:"Fuel Pump", link:"", description:"Walbro GSS340 255LPH (Available at iRace! Click Here!)"},
+{name:"Full Engine Gasket Kit", link:"", description:"Neo - 10101-AA525 (Available at LF Industries Canada! Click Here!)"},
+{name:"Timing Belt", link:"", description:"13028-20P25 (Amazon Canada Link to the one I bought)\n(Amazon Canada Link to the Full Kit with Pulleys)"}
+],
+transmission: [
+{name:"S2 Tiptronic", link:"", description:"RE4R01B"},
+{name:"Automatic Transmission Filter & Gasket", link:"", description:"JS JT304K, Nissan P/N 31728-4AX00"},
+{name:"Automatic Transmission Pan Gasket", link:"", description:"31397-41X04"},
+{name:"Stage 2 Shift Kit", link:"", description:"MV Automatics offers a Stage 2 Shift Kit for the RE4R01A & RE4R01B transmissions found in the Stagea."},
+{name:"5 Speed Manual Swap", link:"", description:"Details not provided."}
+],
+suspension: [
+{name:"Outer Tie Rod Ends", link:"", description:"Factory AWD: S1 & S2 - Moog ES3466 (2000-2002 Nissan Xterra)\nFactory RWD S2 Left Moog ES800357, Right Moog ES800358"},
+{name:"Front Lower Ball Joints", link:"", description:"40160-AR510, Febest 0220-LWD1"},
+{name:"Rear Ball Joint", link:"", description:"1995-1998 Nissan 240SX, RDS-BJ492 (Available from Kudos Motorsport! Click Here!)"},
+{name:"Hicas Ball Joint", link:"", description:"55154-30P01, 1989-1996 300ZX TT"},
+{name:"Steering Rack Bellows/Boots", link:"", description:"1995-1998 Nissan 240SX"},
+{name:"Front Stabilizer Link/Sway Bar Link", link:"", description:"Moog K80620, 2006-2010 Hyundai Sonata Rears"},
+{name:"Rear Wheel Bearing", link:"", description:"92-96 300ZX Twin Turbo 43280-AA300"},
+{name:"Rear Wheel Seal", link:"", description:"43252-40P00"},
+{name:"Rear Drive Shaft", link:"", description:"Infiniti G35 (unconfirmed)"},
+{name:"CV Axles", link:"", description:"Front Left CVS.823, Front Right CVS.824 (Boost Factory)\nRear CV Axles 02-06 Infiniti G35x"},
+{name:"CV Axle Boots", link:"", description:"Fronts 2004-2006 Infiniti G35x, Inner Boot Kit 39741-05U87, Napa P/N CVB321 (Right), CVB330 (Left), CVB788 (Both Outer)"},
+{name:"Inner CV Joint", link:"", description:"Febest 27X126"},
+{name:"Suspension Notes", link:"", description:"Many suspension components carry over from the R33 Skyline. Rear springs: 8kg minimum, 10kg recommended. Coilover and bushings options available."}
+],
+wheels: [
+{name:"Tire Sizes", link:"", description:"16s - 215/60R16\n17s - 215/55R17 OR 235/50R17\n18s - 235/45R18 (Winters 225/45R18)"},
+{name:"Wheel Studs", link:"", description:"Front 43222-28B10, Rear 43222-50J00"},
+{name:"Lug Nuts", link:"", description:"M12x1.25"},
+{name:"Bolt Pattern", link:"", description:"5x114.3"},
+{name:"Center Bore", link:"", description:"66.1mm"},
+{name:"Brakes", link:"", description:"Detailed information provided for S1/S2 AWD and RWD setups. Front & Rear rotors, pads, calipers swaps listed in description."},
+{name:"Brake Master Cylinder", link:"", description:"GKTech HFM BM57 RHD Variant (Available from iRace! Click Here!)"}
+],
+interior: [
+{name:"Stereo", link:"", description:"Scosche NN03B Wiring Adapter\nScosche NDAB Antenna Adapter"},
+{name:"Front Speakers", link:"", description:"6.75\" Component Speakers"},
+{name:"Rear Speakers", link:"", description:"6.5\""},
+{name:"Stereo Trim Removal", link:"", description:"YouTube Link"},
+{name:"7\" Android Double Din Dash Adapter", link:"", description:"Main: http://bit.ly/StagXanaviMain\nBackup: http://bit.ly/StagXanavi"}
+],
+exterior: [
+{name:"R34 Front Clip Swap", link:"https://youtu.be/S8R1E_ob5Aw", description:"Thanks Douglas Butler for the vid! Follow him on Instagram! @jdm.douglas"},
+{name:"Windshield Moulding", link:"", description:"72752-0V010, Rubber Dum Seal G2G16-89900"},
+{name:"Wiper Blades", link:"", description:"All blades are a J Hook\nDrivers - 21\"\nPassenger - 17\"\nRear - 12\""},
+{name:"Hood Struts", link:"", description:"95-99 Nissan Maxima, StrongArm Part 4524, 10mm Ball Studs M8X1.25"},
+{name:"Rear Hatch Struts", link:"", description:"2005-15 Nissan Xterra, LH - 76649-EA000, RH - 76648-EA000\n20\" 118lb Strut StrongArm 6939, 23\" 120lb Strut AMS 6947"},
+{name:"Hood Latch", link:"", description:"65601-70Y00"},
+{name:"S1 Bumper Lights", link:"", description:"1993-1997 Nissan Altima (Tabs need minor filing, direct fit)"},
+{name:"Badges", link:"", description:"Hatch 'Stagea' Badge - 90895-0V000\nHatch 'Nissan' Badge - 90890-0V010\nGrille 'Unicorn' Badge - 62892-0V801"},
+{name:"Door Link", link:"", description:"80430-KB50B & 80431-KB50B"},
+{name:"Rear Washer Arm Pivot Seal", link:"", description:"2009-2020 Nissan GTR 28715-0V000"}
+],
+fluids: [
+{name:"Engine Oil", link:"", description:"Japanese Spec 7.5w30 Synthetic, Canadian Recommended 5w30 OR 10w30 Synthetic ~4.3L W/O Filter, ~4.7L W/ Filter"},
+{name:"Oil Filter", link:"", description:"15208-53J0A, Mobil-1 M1-208, K&N HP-2008, Wix 51361"},
+{name:"Transmission", link:"", description:"Nissan Matic J / Castrol Transmax J or Z, ~6.5L W/O Torque Converter, ~9L W/ Torque Converter"},
+{name:"Differentials", link:"", description:"Front: Motul Gear 300 75w90 ~1.3L\nRear: Motul Gear 300 75w90 Limited Slip Diff ~2.5L"},
+{name:"Attesa AWD", link:"", description:"Reservoir located in trunk, drivers side: ATF 4400 (SAE 10W), Nissan Matic D ~1.8L"},
+{name:"Power Steering", link:"", description:"ATF 4400 (SAE 10W), Redline D4 ~1.5L"},
+{name:"Brakes", link:"", description:"Bosch DOT 3 or equivalent ~1.5L"},
+{name:"Coolant", link:"", description:"Nissan Green 50/50 Premix ~5L"}
+],
+alignment: [
+{name:"Front Total Toe", link:"", description:"0 to 0.17"},
+{name:"FL + FR Toe", link:"", description:"0 to 0.09"},
+{name:"FL + FR Camber", link:"", description:"-1.33 to 0.17"},
+{name:"Rear Total Toe", link:"", description:"-0.13 to 0.33"},
+{name:"RL + RR Toe", link:"", description:"-0.07 to 0.17"},
+{name:"RL + RR Camber", link:"", description:"-1.42 to -0.42"},
+{name:"L + R Caster", link:"", description:"5.83 to 7.33"},
+{name:"L + R SAI", link:"", description:"12.33 to 13.83"}
+],
+rb25: [
+{name:"RB25DE Generic Info", link:"", description:"Detailed RB25DE and RB25DET S1/S2/NEO specs, camshaft durations, lift, power, turbo, injectors, NEO modifications, boost and tuning info. More info: http://mywikimotors.com/rb25det/"}
+]
 };
 
-// Functions
-function toggleMenu(id) {
-  const menu = document.getElementById(id);
-  menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
-
-function showParts(section) {
-  const content = document.getElementById("contentBox");
-  content.innerHTML = `<div class="title">Stagea / R33 - ${section.toUpperCase()}</div>`;
-  const parts = stageaData[section];
-  if (!parts || parts.length === 0) {
-    content.innerHTML += `<div class="partnumber">No parts added yet</div>`;
-    return;
-  }
-  parts.forEach((p,index) => {
-    content.innerHTML += `
-      <div class="partnumber">
-        <span style="cursor:pointer; font-weight:bold;" onclick="toggleDesc('${section}-${index}')">${p.name}</span>
-        <a href="${p.link}" target="_blank">Link</a>
-        <div id="${section}-${index}" style="display:none; margin-top:5px; color:#333;">${p.description}</div>
-      </div>`;
-  });
+function showParts(category){
+   const content = document.getElementById("contentBox");
+   content.innerHTML = `<div class="title">${category.toUpperCase()}</div>`;
+   const parts = data[category];
+   if(parts.length === 0){ content.innerHTML += `<div class="partnumber">No parts added yet</div>`; return; }
+   parts.forEach((p,index)=>{
+       content.innerHTML += `
+       <div class="partnumber">
+           <span style="cursor:pointer; font-weight:bold;" onclick="toggleDesc('${category}-${index}')">${p.name}</span>
+           <a href="${p.link}" target="_blank">Link</a>
+           <div id="${category}-${index}" style="display:none; margin-top:5px; color:#333; white-space:pre-wrap;">${p.description}</div>
+       </div>`;
+   });
 }
 
 function toggleDesc(id){
-  const el = document.getElementById(id);
-  el.style.display = el.style.display==="none" ? "block" : "none";
+   const el=document.getElementById(id);
+   el.style.display = el.style.display==="none" ? "block" : "none";
 }
 </script>
-
 </body>
 </html>
