@@ -2,191 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Parts Catalog</title>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: white;
-    }
-
-    /* Header */
-    .header {
-        background: #cc0000; 
-        color: white;
-        padding: 15px;
-        font-size: 22px;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    /* Sidebar */
-    .sidebar {
-        width: 260px;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        background: #f2f2f2;
-        border-right: 2px solid #cc0000;
-        padding-top: 70px;
-        overflow-y: auto;
-    }
-
-    .sidebar h3 {
-        padding-left: 20px;
-    }
-
-    .menu-item {
-        padding: 10px 20px;
-        cursor: pointer;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .menu-item:hover {
-        background: #ffe6e6;
-    }
-
-    .submenu {
-        display: none;
-        background: #ffffff;
-        border-left: 3px solid #cc0000;
-    }
-
-    .submenu div {
-        padding: 8px 30px;
-        cursor: pointer;
-        border-bottom: 1px solid #eee;
-    }
-
-    .submenu div:hover {
-        background: #ffcccc;
-    }
-
-    /* Main content */
-    .content {
-        margin-left: 270px;
-        padding: 25px;
-    }
-
-    .title {
-        font-size: 24px;
-        font-weight: bold;
-        border-bottom: 3px solid #cc0000;
-        display: inline-block;
-        margin-bottom: 15px;
-    }
-
-    .partnumber {
-        background: #ffefef;
-        border: 1px solid #cc0000;
-        padding: 10px;
-        margin: 5px 0;
-        width: fit-content;
-        border-radius: 4px;
-    }
-</style>
+<title>Vehicle Parts Catalog</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<div class="header">Parts Catalog</div>
+<div class="header">Vehicle Parts Catalog</div>
 
 <div class="sidebar">
-
-    <h3>Select Vehicle</h3>
-
-    <!-- Car 1 -->
-    <div class="menu-item" onclick="toggleMenu('rb1')">Honda Odyssey RB1/RB2</div>
-    <div id="rb1" class="submenu">
-        <div onclick="showParts('rb1_engine')">Engine</div>
-        <div onclick="showParts('rb1_trans')">Transmission</div>
-        <div onclick="showParts('rb1_susp')">Suspension & Driveline</div>
-        <div onclick="showParts('rb1_wheel')">Wheels & Brakes</div>
-        <div onclick="showParts('rb1_interior')">Interior</div>
-        <div onclick="showParts('rb1_exterior')">Exterior</div>
-        <div onclick="showParts('rb1_fluids')">Fluids</div>
-        <div onclick="showParts('rb1_align')">Wheel Alignment Specs</div>
-    </div>
-
-    <!-- Car 2 -->
-    <div class="menu-item" onclick="toggleMenu('c34')">Nissan Stagea C34</div>
-    <div id="c34" class="submenu">
-        <div onclick="showParts('c34_engine')">Engine</div>
-        <div onclick="showParts('c34_trans')">Transmission</div>
-        <div onclick="showParts('c34_susp')">Suspension & Driveline</div>
-        <div onclick="showParts('c34_wheel')">Wheels & Brakes</div>
-        <div onclick="showParts('c34_interior')">Interior</div>
-        <div onclick="showParts('c34_exterior')">Exterior</div>
-        <div onclick="showParts('c34_fluids')">Fluids</div>
-        <div onclick="showParts('c34_align')">Wheel Alignment Specs</div>
-    </div>
-
-    <!-- Car 3 -->
-    <div class="menu-item" onclick="toggleMenu('m35')">Nissan Stagea M35</div>
-    <div id="m35" class="submenu">
-        <div onclick="showParts('m35_engine')">Engine</div>
-        <div onclick="showParts('m35_trans')">Transmission</div>
-        <div onclick="showParts('m35_susp')">Suspension & Driveline</div>
-        <div onclick="showParts('m35_wheel')">Wheels & Brakes</div>
-        <div onclick="showParts('m35_interior')">Interior</div>
-        <div onclick="showParts('m35_exterior')">Exterior</div>
-        <div onclick="showParts('m35_fluids')">Fluids</div>
-        <div onclick="showParts('m35_align')">Wheel Alignment Specs</div>
-    </div>
-
+<h3>Select Vehicle</h3>
+<a class="vehicle-item" href="odyssey.html">Honda Odyssey RB1/2</a>
+<a class="vehicle-item" href="stageaC34.html">Nissan Stagea C34</a>
+<a class="vehicle-item" href="stageaM35.html">Nissan Stagea M35</a>
 </div>
 
 <div class="content" id="contentBox">
-    <div class="title">Select a category</div>
+<div class="title">Select a vehicle from the sidebar to view parts</div>
 </div>
-
-<script>
-function toggleMenu(id) {
-    let menu = document.getElementById(id);
-    menu.style.display = (menu.style.display === "block") ? "none" : "block";
-}
-
-function showParts(section) {
-    const content = document.getElementById("contentBox");
-
-    // You fill these in later with your real part numbers
-    const data = {
-        rb1_engine: ["Part # RB1-ENG-001", "Part # RB1-ENG-002"],
-        rb1_trans: ["Part # RB1-TRANS-001"],
-        rb1_susp: ["Part # RB1-SUSP-001"],
-        rb1_wheel: ["Part # RB1-WHEEL-001"],
-        rb1_interior: ["Part # RB1-INT-001"],
-        rb1_exterior: ["Part # RB1-EXT-001"],
-        rb1_fluids: ["Part # RB1-FLUID-001"],
-        rb1_align: ["Front camber: -0.5°", "Toe: +0.10°"],
-
-        c34_engine: ["Part # C34-ENG-001"],
-        c34_trans: ["Part # C34-TRANS-001"],
-        c34_susp: ["Part # C34-SUSP-001"],
-        c34_wheel: ["Part # C34-WHEEL-001"],
-        c34_interior: ["Part # C34-INT-001"],
-        c34_exterior: ["Part # C34-EXT-001"],
-        c34_fluids: ["Part # C34-FLUID-001"],
-        c34_align: ["Front toe: +0.05°"],
-
-        m35_engine: ["Part # M35-ENG-001"],
-        m35_trans: ["Part # M35-TRANS-001"],
-        m35_susp: ["Part # M35-SUSP-001"],
-        m35_wheel: ["Part # M35-WHEEL-001"],
-        m35_interior: ["Part # M35-INT-001"],
-        m35_exterior: ["Part # M35-EXT-001"],
-        m35_fluids: ["Part # M35-FLUID-001"],
-        m35_align: ["Rear camber: -1.0°"]
-    };
-
-    content.innerHTML = `<div class="title">${section.replace('_', ' ').toUpperCase()}</div>`;
-
-    data[section].forEach(p => {
-        content.innerHTML += `<div class="partnumber">${p}</div>`;
-    });
-}
-</script>
 
 </body>
 </html>

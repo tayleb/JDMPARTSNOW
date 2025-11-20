@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Honda Odyssey RB1/2 Parts Catalog</title>
+<style>
+body { font-family: Arial, sans-serif; margin:0; background:#fff; }
+.header { background:#cc0000; color:white; padding:15px; font-size:22px; text-align:center; font-weight:bold; }
+.sidebar { width:280px; height:100vh; position:fixed; left:0; top:0; background:#f2f2f2; border-right:2px solid #cc0000; padding-top:70px; overflow-y:auto; }
+.sidebar h3 { padding-left:20px; }
+.vehicle-item { padding:10px 20px; cursor:pointer; border-bottom:1px solid #ddd; }
+.vehicle-item:hover { background:#ffe6e6; }
+.submenu { display:none; background:#ffffff; border-left:3px solid #cc0000; }
+.submenu div { padding:8px 30px; cursor:pointer; border-bottom:1px solid #eee; }
+.submenu div:hover { background:#ffcccc; }
+.content { margin-left:290px; padding:25px; }
+.title { font-size:24px; font-weight:bold; border-bottom:3px solid #cc0000; display:inline-block; margin-bottom:15px; }
+.partnumber { background:#ffefef; border:1px solid #cc0000; padding:10px; margin:5px 0; width:fit-content; border-radius:4px; }
+a { color:#cc0000; text-decoration:underline; margin-left:10px; }
+</style>
+</head>
+<body>
+
+<div class="header">Honda Odyssey RB1/2 Parts Catalog</div>
+
+<div class="sidebar">
+<h3>Categories</h3>
+<div class="vehicle-item" onclick="showParts('engine')">Engine</div>
+<div class="vehicle-item" onclick="showParts('transmission')">Transmission</div>
+<div class="vehicle-item" onclick="showParts('suspension')">Suspension & Driveline</div>
+<div class="vehicle-item" onclick="showParts('wheels')">Wheels & Brakes</div>
+<div class="vehicle-item" onclick="showParts('interior')">Interior</div>
+<div class="vehicle-item" onclick="showParts('exterior')">Exterior</div>
+<div class="vehicle-item" onclick="showParts('fluids')">Fluids</div>
+<div class="vehicle-item" onclick="showParts('alignment')">Wheel Alignment Specs</div>
+</div>
+
+<div class="content" id="contentBox">
+<div class="title">Select a category</div>
+</div>
+
+<script>
+const data = {
+engine: [
+{name:"Spark Plugs", link:"", description:"A-Premium APSP097 (A-Premium Canada), NGK 6994/IZFR6K11 (Amazon Link)"},
+{name:"Ignition Coil", link:"", description:"30520-PNA-007, NGK 48922"},
+{name:"Upstream Oxygen Sensor", link:"", description:"2004-2008 Acura TSX, NTK 24668 (Amazon Link)"},
+{name:"Downstream Oxygen Sensor", link:"", description:"36532-RFE-J01, RB1/2 Odyssey Specific, Bosch 15410 will work with wiring modifications"},
+{name:"RB1/2 Air Filter", link:"", description:"OEM Paper Style (Amazon Canada / Walmart Canada), K&N 33-2072, aFe 30-10041, NapaGold/WIX 46028"},
+{name:"RB3/4 Air Filter", link:"", description:"17220-RLF-000 (Amazon Canada)"},
+{name:"Brian Crower Exhaust Valves", link:"", description:"BC3905"},
+{name:"Brian Crower Intake Valves", link:"", description:"BC3904"},
+{name:"Engine Block Heater", link:"", description:"Zerostart 310-0006, Temro 310-0124, K-Tuned KTD-OIL-103, requires K-Tuned Oil Block Off Plate"},
+{name:"Inline Coolant Heater", link:"", description:"Zerostart 320-0002 1-1/4\" Lower Radiator Hose Heater (Amazon Link)"},
+{name:"Battery", link:"", description:"OEM Fit - 51R Series, Modified Fit - 26R or 35 Series, requires terminal modifications for Japanese spec battery"},
+{name:"Radiator", link:"", description:"Closest USDM carry over is 08-12 Accord, 25mm shorter, cap in different spot"},
+{name:"AC Condenser", link:"", description:"80110-SFE-003 OR 80100-SFE-003, 730x419x16mm, no USDM crossover"},
+{name:"Starter", link:"", description:"A-Premium 17960N (Amazon Link)"},
+{name:"Alternator", link:"", description:"Bosch AL1298X, requires water pump housing swap to USDM style, may require pulleys and tensioner replacement"},
+{name:"Water Pump", link:"", description:"19200-RFE-003, K24, 04-08 Acura TSX, 03-07 Accord Japan Built, 03-11 Element Japan Built, 07-09 CRV Mexico Built"},
+{name:"RB1/2 Serpentine Belt", link:"", description:"OE Pulley Setup 7PK1776, TSX Pulley Setup 7PK1755"},
+{name:"RB3/4 Serpentine Belt", link:"", description:"02-05 Honda CRV, Continental 4070682"},
+{name:"Fuel Filter", link:"", description:"In Tank 17048-SFE-010, 03-05 Honda Civic Type R"},
+{name:"Air Flow Meter", link:"", description:"On Air Box 37880-PLM-A01, 04-07 Honda CRV"},
+{name:"Oil Pressure Switch", link:"", description:"37240-PT0-014"},
+{name:"Oil Pan Drain Plug", link:"", description:"M14x1.5 90009-R70-A00"},
+{name:"RB1/3 Fuel Pump", link:"", description:"17045-SFE-H50 Level sensor on LH Side, looks like 05-10 USDM Odyssey identical, not confirmed"},
+{name:"RB2/4 Fuel Pump", link:"", description:"17045-SFF-900 Level sensor on RH Side, looks like 05-06 Acura RSX identical, not confirmed"}
+],
+transmission: [
+{name:"MFLA 5 Speed Automatic Transmission", link:"", description:"Non-CVT transmission for RB1/2 Odyssey"},
+{name:"MFLA Transmission In Line Filter", link:"", description:"25430-PLR-003, located under air box, 04-08 Acura TSX"},
+{name:"MFLA Transmission Strainer Filter", link:"", description:"25420-RCK-004, in transmission pan, 04-08 Acura TSX"},
+{name:"MFLA Transmission Bearing", link:"", description:"91057-SR3-008, 2004-2014 Acura TSX"},
+{name:"MFLA Transmission Valvebody Upgrade Shift Kit", link:"", description:"Superior Transmission Parts STL-HO5-4CYL"}
+],
+suspension: [
+{name:"Front Lower Control Arm Bushings", link:"", description:"2008.5 - 2014 Acura TSX"},
+{name:"Front Upper Ball Joints", link:"", description:"Delphi TC1153 fixed, Delphi TC7658 adjustable, Moog K100330, SPC 67320"},
+{name:"Front Lower Ball Joints", link:"", description:"Delphi TC2942, Moog K80228, FeBest 0320-CL7D"},
+{name:"Complete Bushings", link:"", description:"Siberian Bushing Canada, wide selection for JDM Odyssey"},
+{name:"Inner CV Joint & Boot", link:"", description:"2004 - 2008 Acura TSX"},
+{name:"Front Left CV Shaft", link:"", description:"2003 - 2007 Honda Accord 2.4L Manual, Trakmotive HO8188"},
+{name:"Front Right CV Shaft", link:"", description:"2003 - 2007 Honda Accord 2.4L Manual, A-Premium APCVA576, Trakmotive HO8204"},
+{name:"Rear Upper Control Arms", link:"", description:"2007 - 2011 Honda CRV Adjustable Moog RK100046"},
+{name:"Front Strut", link:"", description:"2004 - 2008 Acura TSX, A-Premium APSA1266, KYB 340066"},
+{name:"Front Strut Mount", link:"", description:"2004 - 2008 Acura TSX, A-Premium APSM205, MOOG K160223"},
+{name:"Rear Strut", link:"", description:"2012 - 2016 Honda CRV AWD, carry over RB top hat, may lose AFS function"},
+{name:"Rear Strut Mount", link:"", description:"2002 - 2016 Honda CRV, MOOG K90646"},
+{name:"Rear Coil Spring", link:"", description:"2002 - 2009 Honda CRV, 52441-SWA-A11, A-Premium APCS335"},
+{name:"Rear CV Joint", link:"", description:"2002 - 2006 Honda CRV, 42320-SCA-306"},
+{name:"Front Outer CV Boot", link:"", description:"2003 - 2007 Honda Accord, 44018-S9A-020"},
+{name:"Front Inner CV Boot", link:"", description:"2003 - 2007 Honda Accord, 44017-S3X-010"},
+{name:"Rear Inner & Outer CV Boot", link:"", description:"1998 - 2006 Honda CRV, Mevotech DX628"}
+],
+wheels: [
+{name:"Tire Sizes", link:"", description:"16s - 215/60R16, 17s - 215/55R17 OR 235/50R17, 18s - 245/40R18, Winters 225/45R18"},
+{name:"Lug Nuts", link:"", description:"M12x1.5"},
+{name:"Wheel Studs", link:"", description:"90113-SD4-902"},
+{name:"Bolt Pattern", link:"", description:"5x114.3"},
+{name:"Center Bore", link:"", description:"64.1mm"},
+{name:"RB1/2 Front Calipers", link:"", description:"2004-2008 Acura TSX, FR - A-Premium APBC1950"},
+{name:"RB1/2 Absolute Front Rotors", link:"", description:"2004-2008 Acura TSX, A-Premium APBRS106 Drilled & Slotted"},
+{name:"RB1/2/3/4 Non-Absolute Front Rotors", link:"", description:"1998-2003 Honda Accord, 282mm, PowerStop JBR709SCR"},
+{name:"RB1/2 Front Brake Calipers", link:"", description:"2004-2008 Acura TSX, may require grinding/shim"},
+{name:"RB1/2 Front Brake Pads", link:"", description:"2004-2008 Acura TSX"},
+{name:"RB3/4 Front Brake Pads", link:"", description:"2003-2011 Honda Element, Bosch BE914H"},
+{name:"RB1/2/3/4 Rear Brake Pads", link:"", description:"Project Mu R391, Endless EP420, Febest 0301-RB2R"},
+{name:"RB1/2/3/4 Rear Rotors", link:"", description:"305mm, 2005-2012 Honda CRV, thickness note for CRV rotors vs Odyssey"},
+{name:"RB1/2/3/4 Rear Brake Caliper", link:"", description:"2005-2006 Honda CRV only, pads will fit"},
+{name:"Rear Parking Brake", link:"", description:"05-06 Honda CRV, 43154-SFE-J01"},
+{name:"Front Brembo Setup", link:"", description:"Brembo calipers & rotors, hub centric rings, dust shield modification required"},
+{name:"ABS Module", link:"", description:"04-08 Acura TSX"},
+{name:"Front Left ABS Sensor", link:"", description:"04-08 Acura TSX, A-Premium ABS0040"},
+{name:"Front Right ABS Sensor", link:"", description:"04-08 Acura TSX, A-Premium ABS0037"},
+{name:"Rear Left ABS Sensor", link:"", description:"02-06 Honda CRV, A-Premium ABS0044"},
+{name:"Rear Right ABS Sensor", link:"", description:"02-06 Honda CRV, A-Premium ABS0043"}
+],
+interior: [
+{name:"RB1/2/3/4 Cabin Air Filter", link:"", description:"Honda OEM 80292-SDA-407, Fram CF10134, NapaGold 4815"},
+{name:"Internavi Stereo Swap", link:"", description:"Custom wiring needed, Pinterest guide & YouTube installation links provided"},
+{name:"Antenna Adapter", link:"", description:"Scosche HAAB 2005-up Honda"},
+{name:"Amplifier Tie In Adapter", link:"", description:"Metra 70-1721"},
+{name:"Navi Dash Stereo", link:"", description:"AMPrime Android Dashkit"},
+{name:"Speakers", link:"", description:"Front 6.5\" Component, Rear 6.5\" Coaxial"},
+{name:"Ignition Starter Switch", link:"", description:"35130-SAA-J51, 03-07 Honda Accord"},
+{name:"Drivers Door Handle Latch Release", link:"", description:"72131-SDA-A02, 03-07 Honda Accord Sedan"}
+],
+exterior: [
+{name:"Windshield Wiper Blades", link:"", description:"RB1/2 Driver 28\" U-Hook, Passenger 13\" J-Hook; RB3/4 Driver 26\" J-Hook, Passenger 18\" J-Hook"},
+{name:"Rear Wiper Arm Replacement", link:"", description:"2012-16 Honda CRV, requires 11\" J Hook"},
+{name:"Front Window Washer Motor", link:"", description:"76806-SL0-G01, 02-06 Acura RSX / 01-06 Honda CRV"},
+{name:"Gas Cap", link:"", description:"2004 Honda Accord 2.4L"},
+{name:"JDM to USDM License Plate Adapters", link:"", description:"Amazon Link"},
+{name:"2006-2008 Fitted Mudflaps", link:"", description:"May fit 03-05 as well"},
+{name:"Rear Hatch Struts", link:"", description:"04741-SFJ-W00 (R) & 04746-SFJ-W00 (L)"},
+{name:"Lighting", link:"", description:"Various bulbs for DRL, Fog, High Beam, Turn Signals, LED relay, Side Markers; see description for details"}
+],
+fluids: [
+{name:"Transmission Fluid", link:"", description:"CVT HMMF or equivalent, 5 Speed Absolute ATF-DW1, 2.8L initial fill, 6.5L total"},
+{name:"Rear Differential", link:"", description:"Honda Dual Pump II Fluid ~1.1L"},
+{name:"Coolant", link:"", description:"50/50 Premix, 5L total fill"},
+{name:"Engine Oil", link:"", description:"RB1/2 Non-Absolute 5w20, Absolute 5w30; RB3/4 5w20 (All Temps)"},
+{name:"Oil Filter", link:"", description:"15400-PLM-A02, WIX 57356XP, Mobil 1 M1-110"},
+{name:"Brake Fluid", link:"", description:"DOT 3"}
+],
+alignment: [
+{name:"Front Total Toe", link:"", description:"-0.16° to +0.16°"},
+{name:"Steer Ahead", link:"", description:"-0.05° to +0.05°"},
+{name:"Front Left Toe", link:"", description:"-0.08° to +0.08°"},
+{name:"Front Right Toe", link:"", description:"-0.08° to +0.08°"},
+{name:"Front Left Camber", link:"", description:"-1.0° to +1.0°"},
+{name:"Front Right Camber", link:"", description:"-1.0° to +1.0°"},
+{name:"Front Left Caster", link:"", description:"+3.9° to +5.4°"},
+{name:"Front Right Caster", link:"", description:"+3.9° to +5.4°"},
+{name:"Rear Total Toe", link:"", description:"-0.16° to +0.16°"},
+{name:"Rear Left Toe", link:"", description:"-0.08° to +0.08°"},
+{name:"Rear Right Toe", link:"", description:"-0.08° to +0.08°"},
+{name:"Rear Left Camber", link:"", description:"-1.8° to -0.03°"},
+{name:"Rear Right Camber", link:"", description:"-1.8° to -0.03°"}
+]
+};
+
+function showParts(category){
+    const content = document.getElementById("contentBox");
+    content.innerHTML = `<div class="title">${category.toUpperCase()}</div>`;
+    const parts = data[category];
+    if(parts.length === 0){ content.innerHTML += `<div class="partnumber">No parts added yet</div>`; return; }
+    parts.forEach((p,index)=>{
+        content.innerHTML += `
+        <div class="partnumber">
+            <span style="cursor:pointer; font-weight:bold;" onclick="toggleDesc('${category}-${index}')">${p.name}</span>
+            <a href="${p.link}" target="_blank">Link</a>
+            <div id="${category}-${index}" style="display:none; margin-top:5px; color:#333;">${p.description}</div>
+        </div>`;
+    });
+}
+
+function toggleDesc(id){
+    const el=document.getElementById(id);
+    el.style.display = el.style.display==="none" ? "block" : "none";
+}
+</script>
+</body>
+</html>
+

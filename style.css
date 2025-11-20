@@ -1,0 +1,13 @@
+body { margin: 0; font-family: Arial, sans-serif; background: white; }
+.header { background: #cc0000; color: white; padding: 15px; font-size: 22px; text-align: center; font-weight: bold; }
+.sidebar { width: 280px; height: 100vh; position: fixed; left: 0; top: 0; background: #f2f2f2; border-right: 2px solid #cc0000; padding-top: 70px; overflow-y: auto; }
+.sidebar h3 { padding-left: 20px; }
+.vehicle-item { padding: 10px 20px; cursor: pointer; border-bottom: 1px solid #ddd; }
+.vehicle-item:hover { background: #ffe6e6; }
+.submenu { display: none; background: #ffffff; border-left: 3px solid #cc0000; }
+.submenu div { padding: 8px 30px; cursor: pointer; border-bottom: 1px solid #eee; }
+.submenu div:hover { background: #ffcccc; }
+.content { margin-left: 290px; padding: 25px; }
+.title { font-size: 24px; font-weight: bold; border-bottom: 3px solid #cc0000; display: inline-block; margin-bottom: 15px; }
+.partnumber { background: #ffefef; border: 1px solid #cc0000; padding: 10px; margin: 5px 0; width: fit-content; border-radius: 4px; }
+a { color: #cc0000; text-decoration: underline; margin-left: 10px; }
