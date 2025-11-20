@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: url('CDNJDMPARTS.png') no-repeat center center fixed; /* custom background */
+  background: url('images/CDNJDMPARTS.png') no-repeat center center fixed; /* custom background */
   background-size: cover; /* cover whole screen */
   display: flex;
   justify-content: center; /* horizontal center */
@@ -38,3 +38,4 @@ body {
 .vehicle-item:hover {
   background-color: #990000;  /* darker red on hover */
 }
+
